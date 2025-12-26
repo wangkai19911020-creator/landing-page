@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Grounding Sheets - Consumer Verification</title>
+    
+    <style>
+        /* ==================== STYLES.CSS ==================== */
+        /* 基础设置 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #5cb85c;
+            --accent-color: #d9534f;
+            --text-dark: #1a1a1a;
+            --text-normal: #333;
+            --text-light: #666;
+            --bg-light: #f5f5f5;
+            --bg-yellow: #fff9e6;
+            --border-color: #E5E7EB;
+            --border-light: #E5E7EB;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif; line-height: 1.6; color: var(--text-normal); background-color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* 导航栏 */
+        .navbar { background-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; padding: 1rem 0; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-normal); font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); }
+        .menu-toggle { display: none; flex-direction: column; gap: 4px; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background-color: var(--text-dark); transition: 0.3s; }
+        
+        /* Hero 区域 */
+        .hero { 
+            position: relative; 
+            background-image: url('images/hero.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            min-height: 300px; 
+            display: flex; 
+            align-items: center; 
+            color: white; 
+        }
+        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); }
+        .hero-content { position: relative; z-index: 1; text-align: center; padding: 2.5rem 0; }
+        .hero h1 { font-size: 2.25rem; margin-bottom: 1rem; line-height: 1.3; font-weight: 700; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .update-date { font-size: 1rem; opacity: 0.95; }
+        
+        /* 介绍区域 */
+        .intro { padding: 3rem 0; background-color: #fff; }
+        .intro p { margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.7; color: var(--text-normal); }
+        .intro strong { color: var(--text-dark); font-weight: 600; }
+        
+        /* 优惠提醒 */
+        .deals-reminder { background-color: #eef4fc; color: #1a1a1a; padding: 2rem 0; text-align: center; border-top: 1px solid #dce9f9; border-bottom: 1px solid #dce9f9; }
+        .deals-reminder h3 { font-size: 1.5rem; margin-bottom: 0.5rem; font-weight: 700; color: #2c5aa0; }
+        
+        /* 产品列表区域 */
+        .products { padding: 3rem 0 2rem; background-color: #fff; }
+        .section-heading { font-size: 1.75rem; font-weight: 700; color: var(--text-dark); text-align: center; margin-bottom: 2.5rem; }
+        
+        /* 表格/卡片通用样式 */
+        .product-table-wrapper { position: relative; border: 2px solid var(--border-color); margin-bottom: 3rem; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; will-change: transform; }
+        .product-table-wrapper:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .badge-green-arrow { position: absolute; top: 20px; left: -3px; background: #5cb85c; color: #fff; padding: 6px 18px 6px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; z-index: 10; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%); }
+        .badge-square { position: absolute; top: 0; left: 0; background: #000; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 700; z-index: 10; border-right: 2px solid var(--border-color); border-bottom: 2px solid var(--border-color); }
+        
+        .product-table { width: 100%; border-collapse: collapse; }
+        .product-table thead tr { border-bottom: 2px solid var(--border-color); }
+        .product-table th { padding: 18px 20px; text-align: center; vertical-align: middle; border: none; }
+        
+        .col-image { width: 270px; border-right: 2px solid var(--border-color); text-align: center; }
+        .col-title { font-size: 20px; font-weight: 600; color: var(--text-dark); border-right: 2px solid var(--border-color); }
+        .col-rating { width: 280px; font-size: 14px; font-weight: 600; color: var(--text-normal); }
+        .stars-header { color: #ff9800; font-size: 20px; letter-spacing: 1px; margin-top: 6px; }
+        
+        .product-table tbody td { padding: 25px; vertical-align: top; border-right: 2px solid var(--border-color); }
+        .product-table tbody td:last-child { border-right: none; }
+        
+        .product-main-img { width: 100%; max-width: 200px; display: block; margin: 0 auto 15px; border-radius: 4px; }
+        
+        /* 品牌 Logo 样式 */
+        .brand-logo-img { display: block; max-width: 140px; margin: 12px auto 0; height: auto; }
+        
+        .brand-text { font-size: 18px; font-weight: 700; color: var(--text-normal); margin-top: 12px; }
+        .doctor-badge { display: inline-block; background: #fff; border: 1px solid var(--border-light); color: var(--text-normal); padding: 6px 10px; font-size: 10px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; text-align: center; }
+        
+        .features-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+        .feature-box { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+        .icon-check, .icon-cross, .check-icon { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; color: #fff !important; font-size: 14px; font-weight: 900; flex-shrink: 0; line-height: 1; margin-right: 8px; margin-top: 2px; }
+        .icon-check, .check-icon { background-color: #10b981; }
+        .icon-cross { background-color: #ef4444; }
+        
+        .feature-content strong { font-weight: 700; color: var(--text-dark); display: block; }
+        .feature-content p { color: #337ab7; margin: 2px 0 0; font-size: 13px; }
+        .read-review-link { text-align: center; margin-top: 18px; }
+        .read-review-link a { color: #5cb85c; text-decoration: none; font-weight: 700; font-size: 14px; }
+        
+        .col-score { text-align: center; }
+        .big-score-num { font-size: 68px; font-weight: 800; color: var(--text-dark); line-height: 0.9; margin-bottom: 10px; letter-spacing: -2px; }
+        .stars-big { color: #ff9800; font-size: 22px; letter-spacing: 2px; margin-bottom: 12px; }
+        .users-rated { font-size: 12px; color: var(--text-normal); margin-bottom: 20px; line-height: 1.5; font-weight: 400; }
+        .promo-box { background: linear-gradient(135deg, #d9534f, #c9302c); color: #fff; padding: 14px; margin-bottom: 16px; font-size: 13px; font-weight: 600; line-height: 1.7; border-radius: 3px; }
+        
+        .visit-site-btn, .check-btn, .cta-button { display: block; background: linear-gradient(135deg, #5cb85c, #4cae4c); color: #fff; text-decoration: none; padding: 12px 20px; font-weight: 700; font-size: 13px; text-transform: uppercase; margin-bottom: 14px; border-radius: 3px; transition: transform 0.2s ease, box-shadow 0.2s ease; will-change: transform; letter-spacing: 0.3px; }
+        .visit-site-btn:hover, .check-btn:hover, .cta-button:hover { background: linear-gradient(135deg, #4cae4c, #5cb85c); transform: translate3d(0, -1px, 0); box-shadow: 0 3px 8px rgba(92, 184, 92, 0.3); }
+        
+        .shipping-info { color: #5cb85c; font-size: 12px; font-weight: 600; margin-bottom: 12px; margin-top: 4px; }
+        .price-display { margin-top: 8px; }
+        .price-now { font-size: 26px; font-weight: 800; color: var(--text-dark); }
+        .price-was { font-size: 15px; color: #999; text-decoration: line-through; margin-left: 6px; font-weight: 400; }
+        
+        /* 深度评测区域样式 */
+        .detailed-review { padding: 3rem 0; background: white; }
+        .grid-layout-fix { display: grid; grid-template-columns: 300px 1fr 320px; gap: 40px; align-items: start; }
+        
+        /* 特性列表样式 */
+        .feature-row { display: flex; align-items: flex-start; margin-bottom: 14px; color: #374151; font-size: 15px; line-height: 1.5; }
+        .detailed-review .check-icon { margin-right: 12px; margin-top: 2px; width: 22px; height: 22px; font-size: 14px; }
+        .feature-text-group { flex: 1; }
+        .feature-text-group strong { color: #111827; font-weight: 700; margin-right: 4px; }
+        
+        /* 底部 Offer */
+        .special-offer-section { padding: 3rem 0; background: var(--bg-light); }
+        .offer-box { background: white; border: 3px dashed var(--primary-color); border-radius: 12px; padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+        .offer-content h2 { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 1rem; }
+        .offer-image img { width: 100%; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        
+        /* 页脚 */
+        .footer { background: #2c3e50; color: #ecf0f1; padding: 3rem 0 1rem; }
+        .footer-content { display: grid; grid-template-columns: 2fr 1fr; gap: 3rem; margin-bottom: 2rem; }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-links a { color: #ecf0f1; text-decoration: none; }
+        .copyright { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); color: #95a5a6; font-size: 0.9rem; }
+
+        /* 📱 手机端适配 */
+        @media (max-width: 1024px) {
+            .grid-layout-fix { grid-template-columns: 1fr 1fr; }
+            .right-score-col { grid-column: span 2; display: flex; justify-content: space-around; align-items: center; background: #f9fafb; padding: 20px; border-radius: 8px; margin-top: 20px; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: white; flex-direction: column; padding: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            
+            /* 手机端表格转卡片 */
+            .product-table-wrapper { border: none !important; box-shadow: none !important; background: transparent !important; margin-bottom: 0 !important; }
+            .product-table, tbody, tr, td { display: block !important; width: 100% !important; }
+            .product-table thead { display: none !important; }
+            .product-table tr { margin-bottom: 30px; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.06); background: #fff; position: relative; }
+            .col-image { border: none !important; padding: 0 !important; }
+            .col-image img { width: 100% !important; border-radius: 12px 12px 0 0 !important; }
+            .badge-square { position: absolute !important; top: 0 !important; left: 0 !important; z-index: 20; border-radius: 12px 0 8px 0 !important; background: rgba(0,0,0,0.85) !important; border: none !important; }
+            .col-title, .col-rating { display: none !important; }
+            .col-features { padding: 20px !important; border-bottom: 1px solid #eee !important; }
+            .features-two-col { grid-template-columns: 1fr; }
+            .col-score { padding: 25px 20px !important; border: none !important; }
+            
+            /* 深度评测手机适配 */
+            .grid-layout-fix { display: flex !important; flex-direction: column !important; }
+            .detailed-review .left-img-col { order: -1 !important; width: 100% !important; margin-bottom: 20px !important; }
+            .right-score-col { flex-direction: column; width: 100% !important; }
+            
+            .trust-bar { flex-direction: column; }
+            .offer-box { grid-template-columns: 1fr; }
+            .footer-links { flex-direction: column; align-items: center; gap: 1rem; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+        
+        /* 动画 */
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .product-table-wrapper { animation: fadeInUp 0.6s ease-out; }
+    </style>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Consumer Verification</div>
+            <div class="nav-links">
+                <a href="#top5">TOP 5</a>
+                <a href="#detailed-review">Detailed Review</a>
+                <a href="#discount">Discount</a>
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>We Tested the Top 5 Grounding Sheets (2025): Only One Truly Reduces Inflammation & Restores Deep Sleep</h1>
+            <p class="update-date" id="autoDate">✓ Last Updated - December 25, 2025</p>
+        </div>
+    </section>
+
+    <section class="intro">
+        <div class="container">
+            <p>Selecting the ideal grounding sheet can be a game-changer for your sleep quality and overall health. However, navigating the flooded market can be confusing. To simplify your decision, we’ve curated a definitive guide to the <strong>Top 5 Grounding Sheets for 2025</strong>.</p>
+            <p>While grounding is celebrated for enhancing sleep, relieving pain, and lowering stress, quality varies significantly between brands. We conducted rigorous testing on effectiveness, comfort, and value to separate the best from the rest.</p>
+            <p><strong>The results might surprise you: our #1 choice isn't a luxury giant, but an innovative product from a smaller startup. It offers superior performance at a fraction of the price of big-name competitors.</strong></p>
+            <p>Ready to upgrade your rest? Dive into our reviews to find your perfect match. Get grounded, sleep deeper, and wake up feeling brand new!</p>
+        </div>
+    </section>
+
+    <section class="deals-reminder">
+        <div class="container">
+            <h3>Don't Miss These Black Friday Deals</h3>
+            <p>Black Friday Deals with major savings. Many of the biggest brands are offering their steepest discounts of the year — and we've gathered the best of them below.</p>
+        </div>
+    </section>
+
+    <section id="top5" class="products">
+        <div class="container">
+            <h2 class="section-heading">#1 Best Rated – Terra Grounding Bed Sheet</h2>
+
+            <div class="product-table-wrapper">
+                <div class="badge-green-arrow">#1 Tested Winner</div>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th class="col-image"></th>
+                            <th class="col-title">Terra Grounding</th>
+                            <th class="col-rating">
+                                <div>Rating</div>
+                                <div class="stars-header">★★★★★</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-image">
+                                <div class="doctor-badge">DOCTOR-RECOMMENDED<br>Grounding Therapy Brand</div>
+                                <img src="images/1.jpg" alt="Terra Grounding Product" class="product-main-img">
+                                <img src="images/logo-terra.avif" alt="Terra Logo" class="brand-logo-img">
+                            </td>
+                            <td class="col-features">
+                                <div class="features-two-col">
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>New V2 Cooling TENCEL™:</strong><p>65% Tencel for instant cooling & moisture-wicking.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Instant Cooling Comfort:</strong><p>Feels cool the moment you lie down.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Superior Grounding Capabilities:</strong><p>Features a unique grid pattern & 100% silver conductive threads.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Machine Washable:</strong><p>Durable and Long-Lasting, Retains conductivity after repeated washing.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Improved Well-Being:</strong><p>Increased energy levels and overall better health.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Enhanced Sleep Quality:</strong><p>Wake up refreshed with deeper, undisturbed rest.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Effective Pain Relief:</strong><p>Helps alleviate inflammation and chronic pain.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Best Value:</strong><p>Combines premium quality, durability, and affordability.</p></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><strong>Easy Setup:</strong><p>Quick connection to any grounded outlet.</p></div></div>
+                                    <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><strong>Often out of stock due to high demand.</strong></div></div>
+                                </div>
+                                <div class="read-review-link">
+                                    <a href="#detailed-review">&gt;&gt;Read Full Review&lt;&lt;</a>
+                                </div>
+                            </td>
+                            <td class="col-score">
+                                <div class="big-score-num">9.9</div>
+                                <div class="stars-big">★★★★★</div>
+                                <div class="users-rated">50,000 users rated this brand 5 stars</div>
+                                <div class="promo-box">
+                                    50% OFF+$139<br>Grounding Mat Free<br>Ends:<br><span id="promoDate">December 25, 2025</span>
+                                </div>
+                                <a href="https://你的长链接在这里" target="_blank" class="visit-site-btn">VISIT SITE →</a>
+                                <div class="shipping-info">1-3 Days Express Shipping</div>
+                                <div class="price-display">
+                                    <span class="price-now">$109.95</span>
+                                    <span class="price-was">$239.95</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="product-table-wrapper">
+                <div class="badge-square">2</div>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th class="col-image"></th>
+                            <th class="col-title">GroundLuxe</th>
+                            <th class="col-rating">
+                                <div>Rating</div>
+                                <div class="stars-header">★★★★<span class="star-half">☆</span></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-image">
+                                <img src="images/2.jpg" alt="GroundLuxe" class="product-main-img">
+                                <div class="brand-text">GroundLuxe</div>
+                            </td>
+                            <td class="col-features">
+                                <div class="features-two-col">
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Increased silver fiber content enhances grounding efficiency.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Includes a 15-foot universal grounding cord.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Made with high-grade certified organic cotton material.</span></div></div>
+                                    <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Grounding cord needs a specific compatible port.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Fits mattresses up to 13 inches deep.</span></div></div>
+                                    <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Require multimeter testing to ensure proper grounding.</span></div></div>
+                                </div>
+                            </td>
+                            <td class="col-score">
+                                <div class="big-score-num">9.5</div>
+                                <div class="stars-big">★★★★<span class="star-half">☆</span></div>
+                                <div class="users-rated">840+ USERS GAVE THIS BRAND 4.5 STARS</div>
+                                <a href="#" target="_blank" class="visit-site-btn">VISIT AMAZON ➤</a>
+                                <div class="shipping-info">2-5 Days Standard Shipping</div>
+                                <div class="price-display">
+                                    <span class="price-now">$169.99</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="product-table-wrapper">
+                <div class="badge-square">3</div>
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th class="col-image"></th>
+                            <th class="col-title">Earthing</th>
+                            <th class="col-rating">
+                                <div>Rating</div>
+                                <div class="stars-header">★★★★<span class="star-half">☆</span></div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-image">
+                                <img src="images/3.jpg" alt="Earthing" class="product-main-img">
+                                <div class="brand-text">Earthing</div>
+                            </td>
+                            <td class="col-features">
+                                <div class="features-two-col">
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Made with long-lasting, high-quality conductive materials.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Includes all necessary cords and a user guide.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Promotes better sleep and overall well-being.</span></div></div>
+                                    <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Needs a specific grounded outlet for functionality.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Fully washable and simple to clean.</span></div></div>
+                                    <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">User feedback varies on effectiveness and comfort.</span></div></div>
+                                    <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Works on beds of various sizes and styles.</span></div></div>
+                                </div>
+                            </td>
+                            <td class="col-score">
+                                <div class="big-score-num">9.3</div>
+                                <div class="stars-big">★★★★<span class="star-half">☆</span></div>
+                                <div class="users-rated">1,900+ USERS GAVE THIS BRAND 4 STARS</div>
+                                <a href="#" target="_blank" class="visit-site-btn">VISIT AMAZON ➤</a>
+                                <div class="shipping-info">2-5 Days Standard Shipping</div>
+                                <div class="price-display">
+                                    <span class="price-now">$149</span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="moreProducts" class="more-products">
+                <div class="product-table-wrapper">
+                    <div class="badge-square">4</div>
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th class="col-image"></th>
+                                <th class="col-title">Vmtizz</th>
+                                <th class="col-rating">
+                                    <div>Rating</div>
+                                    <div class="stars-header">★★★★<span class="star-half">☆</span></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-image">
+                                    <img src="images/4.jpg" alt="Vmtizz" class="product-main-img">
+                                    <div class="brand-text">Vmtizz</div>
+                                </td>
+                                <td class="col-features">
+                                    <div class="features-two-col">
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Made with 90% bamboo viscose for sustainability.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Includes adapters and an outlet tester for convenience.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Provides effective grounding for improved sleep quality.</span></div></div>
+                                        <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Potential problems with the durability of included cables.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Naturally resists bacteria for better hygiene.</span></div></div>
+                                        <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">May not deliver the highest grounding performance.</span></div></div>
+                                    </div>
+                                </td>
+                                <td class="col-score">
+                                    <div class="big-score-num">9.0</div>
+                                    <div class="stars-big">★★★★☆</div>
+                                    <div class="users-rated">840+ USERS GAVE THIS BRAND 4 STARS</div>
+                                    <a href="#" target="_blank" class="visit-site-btn">VISIT AMAZON ➤</a>
+                                    <div class="shipping-info">2-5 Days Standard Shipping</div>
+                                    <div class="price-display">
+                                        <span class="price-now">$139.99</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="product-table-wrapper">
+                    <div class="badge-square">5</div>
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th class="col-image"></th>
+                                <th class="col-title">Yonwold</th>
+                                <th class="col-rating">
+                                    <div>Rating</div>
+                                    <div class="stars-header">★★★<span class="star-half">☆☆</span></div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="col-image">
+                                    <img src="images/5.jpg" alt="Yonwold" class="product-main-img">
+                                    <div class="brand-text">Yonwold</div>
+                                </td>
+                                <td class="col-features">
+                                    <div class="features-two-col">
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Made with 10% silver and organic fabric.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Ideal for smaller beds or localized grounding use.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Designed to enhance sleep and overall well-being.</span></div></div>
+                                        <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Smaller size may not suit larger bed sizes.</span></div></div>
+                                        <div class="feature-box"><span class="icon-check">✓</span><div class="feature-content"><span class="feature-text">Comes with the safest grounding adapter included.</span></div></div>
+                                        <div class="feature-box"><span class="icon-cross">✗</span><div class="feature-content"><span class="feature-text">Requires proper grounding outlet compatibility for functionality.</span></div></div>
+                                    </div>
+                                </td>
+                                <td class="col-score">
+                                    <div class="big-score-num">8.8</div>
+                                    <div class="stars-big">★★★☆☆</div>
+                                    <div class="users-rated">2,400+ USERS GAVE THIS BRAND 3 STARS</div>
+                                    <a href="#" target="_blank" class="visit-site-btn">VISIT AMAZON ➤</a>
+                                    <div class="shipping-info">2-5 Days Standard Shipping</div>
+                                    <div class="price-display">
+                                        <span class="price-now">$31.99</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="detailed-review" class="detailed-review" style="background: #fff; padding: 40px 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            
+            <div class="review-card-container" style="border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); overflow: hidden; background: #fff; border: 1px solid #eee; margin-bottom: 50px;">
+                
+                <div class="review-header" style="background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%); color: white; padding: 25px 20px; text-align: center; position: relative;">
+                    <div style="width: 54px; height: 54px; margin: -50px auto 10px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.2); position: relative; top: 25px; z-index: 10;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: white;">
+                            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                            <path d="M4 22h16"/>
+                            <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                        </svg>
+                    </div>
+                    <h2 style="margin: 15px 0 5px; font-size: 30px; font-weight: 700;">Terra Grounding</h2>
+                    <p style="margin: 0; font-size: 17px; opacity: 0.95;">Best Overall Grounding Bed Sheet</p>
+                </div>
+
+                <div class="review-body" style="padding: 40px 30px 30px;">
+                    <div class="grid-layout-fix">
+                        <div class="left-img-col">
+                            <img src="images/detail.jpg" alt="Terra Grounding" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: block;">
+                        </div>
+
+                        <div class="middle-features-col" style="padding-top: 5px;">
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Clinically Tested Technology:</strong> Proven to reduce body voltage.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Deep Sleep Support:</strong> Helps fall asleep faster & stay asleep.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Pain & Inflammation Relief:</strong> Recommended by wellness experts.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>100% Conductive Silver Grid:</strong> Maximum grounding efficiency.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Premium Organic Cotton:</strong> Soft, breathable, and hypoallergenic.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Durable SilverLock™:</strong> Retains conductivity after 50+ washes.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Universal Fit:</strong> Compatible with all mattress sizes.
+                                </div>
+                            </div>
+                            <div class="feature-row">
+                                <span class="check-icon">✔</span>
+                                <div class="feature-text-group">
+                                    <strong>Risk-Free Trial:</strong>30-day Money-Back Guarantee.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="right-score-col" style="text-align: center;">
+                            <div style="font-size: 72px; font-weight: 800; line-height: 0.9; color: #111827;">9.9</div>
+                            <div style="color: #fbbf24; font-size: 22px; letter-spacing: 3px; margin: 8px 0;">★★★★★</div>
+                            <div style="margin: 5px auto 10px; width: 50px;">
+                                <svg viewBox="0 0 24 24" fill="#fbbf24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L14.5 8H22L16 13L18.5 21L12 16L5.5 21L8 13L2 8H9.5L12 1Z"/></svg>
+                                <div style="font-size: 10px; font-weight: 700; color: #d97706; text-transform: uppercase;">Best Seller</div>
+                            </div>
+                            <div style="position: relative; background: #ef4444; color: white; padding: 12px; border-radius: 6px; margin: 10px 0 15px; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+                                <strong style="display: block; font-size: 14px;">50% OFF + FREE GIFT</strong>
+                                <span style="font-size: 12px; opacity: 0.9;">Ends: <span id="offerDateFix">December 25, 2025</span></span>
+                                <div style="position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid #ef4444;"></div>
+                            </div>
+                            <a href="https://你的长链接在这里" target="_blank" class="visit-site-btn" style="background: linear-gradient(to bottom, #22c55e, #16a34a); margin-bottom: 12px;">VISIT SITE →</a>
+                            <div style="font-size: 28px; font-weight: 800; color: #111827;">$109.95</div>
+                            <div style="font-size: 14px; text-decoration: line-through; color: #9ca3af;">$239.95</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trust-bar" style="background-color: #f3f4f6; padding: 25px 30px; border-top: 1px solid #e5e7eb; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; display: flex; gap: 12px;">
+                        <div style="color: #2563eb; width: 28px;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div>
+                        <div><h4 style="margin: 0; font-size: 14px; font-weight: 700; color: #1e40af;">Doctor Recommended</h4><p style="margin: 0; font-size: 12px; color: #4b5563;">Trusted by professionals.</p></div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; display: flex; gap: 12px;">
+                        <div style="color: #2563eb; width: 28px;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v3.28a1 1 0 00.684.948l6 1.925m5 6.275V16.5m0 0H19.5a1.5 1.5 0 001.5-1.5V11l-3-4H13m4 8.5v-3.5" /></svg></div>
+                        <div><h4 style="margin: 0; font-size: 14px; font-weight: 700; color: #1e40af;">Fast Shipping</h4><p style="margin: 0; font-size: 12px; color: #4b5563;">Ships within 24 hours.</p></div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; display: flex; gap: 12px;">
+                        <div style="color: #2563eb; width: 28px;"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" /></svg></div>
+                        <div><h4 style="margin: 0; font-size: 14px; font-weight: 700; color: #1e40af;">Risk-Free Trial</h4><p style="margin: 0; font-size: 12px; color: #4b5563;">30-day money-back guarantee.</p></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="long-form-content" style="max-width: 900px; margin: 0 auto; color: #374151; font-size: 17px; line-height: 1.8;">
+                
+                <div style="background-color: #fef3c7; border: 1px solid #fde68a; padding: 30px; border-radius: 8px; margin-bottom: 40px; text-align: center;">
+                    <h3 style="margin-top: 0; margin-bottom: 15px; color: #1f2937; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Our Rigorous Testing Protocol</h3>
+                    <p style="margin: 0; font-size: 15px; line-height: 1.7; text-align: left;">
+                        At Consumer Verification, we take grounding seriously. We evaluated the top 5 brands based on strict criteria: <strong>Conductivity (Multimeter Testing), Material Quality, Comfort & Breathability, Durability (Wash Tests), and Value</strong>. Our goal? To find the one sheet that truly delivers on the promise of better sleep and pain relief—backed by real-world trials.
+                    </p>
+                </div>
+
+                <h2 style="font-size: 34px; font-weight: 800; color: #111827; margin-bottom: 30px; text-align: center; letter-spacing: -0.5px;">Why Terra Grounding Bed Sheet Is Our #1 Pick?</h2>
+                
+                <img src="images/lifestyle.jpg" alt="Terra Bed Sheet Lifestyle" style="max-width: 500px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin: 0 auto 30px; display: block;">
+
+                <p>We tested over 30 grounding products, including expensive mats, pillows, and sheets from major brands. The results were clear: <strong>The Terra Grounding Sheet outperformed them all.</strong> It combines medical-grade conductivity with the comfort of luxury hotel bedding, making it our undisputed Top Choice for 2025.</p>
+
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">1. Clinical-Grade Technology (The "Inflammation Killer")</h3>
+                <p>Grounding is clinically proven to reduce inflammation, the root cause of many chronic health issues. Terra uses a <strong>proprietary grid of 100% silver-infused threads</strong>. This isn't just marketing; typically endorsed by physical therapists, this technology allows your body to absorb the Earth's electrons efficiently, helping to neutralize free radicals and significantly reduce joint pain and muscle tension overnight.</p>
+                
+                <video autoplay loop muted playsinline style="max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin: 20px auto; display: block;">
+                    <source src="images/grounding.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">2. Lab Test Results: Superior Conductivity</h3>
+                <img src="images/test.jpg" alt="Voltage Test" style="max-width: 600px; width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin: 20px auto; display: block;">
+                <p>We didn't just sleep on it; we measured it. Using a standard industrial multimeter, we tested the body voltage of our reviewers before and after touching the sheet. <strong>The Terra sheet consistently dropped body voltage to near zero instantly</strong>, even through light pajamas. This superior connection ensures you are getting the maximum "Earthing" benefit all night long.</p>
+
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">3. New V2 Upgrade: Instant Cooling & Moisture-Wicking</h3>
+                <p>The old version was great, but the <strong>New Terra V2 is a masterpiece.</strong> Crafted from a smooth <strong>65% TENCEL™ lyocell, 30% organic long-staple cotton, and 5% conductive silver fibers</strong>, it brings all-night comfort and health benefits to your rest. Our testers loved the <strong>instant cooling comfort</strong> the moment they lay down. Plus, its fast moisture-wicking properties ensure a sweat-free, dry sleep, helping you wake up refreshed with deeper, undisturbed rest.</p>
+
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">4. Durability: The 50-Wash Cycle Test</h3>
+                <p>Cheap grounding sheets lose their conductivity after a few washes because the silver oxidizes or washes out. Terra uses advanced <strong>SilverLock™ technology</strong>. We subjected the sheet to rigorous washing and drying cycles, and re-tested the conductivity. The result? <strong>Zero loss in performance.</strong> This is a long-term investment in your health that is built to last.</p>
+                
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">The Verdict: Why You Need This Now</h3>
+                <p>If you struggle with insomnia, chronic pain, or just want to wake up feeling rejuvenated, the Terra Grounding Sheet is the most effective natural solution we've tested. <strong>It bridges the gap between medical-grade therapy and home comfort.</strong></p>
+
+                <h3 style="font-size: 22px; font-weight: 700; color: #111827; margin-top: 35px; margin-bottom: 15px;">Exclusive Reader Discount</h3>
+                <p>Because Terra is currently our #1 rated pick, we've secured a special deal. As of <span id="offerTextDate">December 2025</span>, <strong>our readers get an exclusive 50% discount plus a30-day risk-free trial.</strong> Stocks are limited due to high demand, so we recommend checking availability immediately.</p>
+
+            </div>
+            </div>
+    </section>
+
+    <section id="discount" class="special-offer-section">
+        <div class="container">
+            <div class="offer-box">
+                <div class="offer-content">
+                    <h3>FOR OUR READERS:</h3>
+                    <h2>Special 50% Off Discount!</h2>
+                    <p>We Are Excited To Offer Our Readers of <strong>50% OFF SPECIAL DISCOUNT</strong> For <strong>Terra Grounding Sheet</strong> When You Order Today.</p>
+                    <p class="guarantee">30-Day Satisfaction Guarantee + Free Shipping!</p>
+                    
+                    <a href="https://你的长链接在这里" target="_blank" class="check-btn">Check Availability ›</a>
+                    
+                </div>
+                <div class="offer-image">
+                    <img src="images/offer.jpg" alt="Special Offer">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Consumer Verification</h3>
+                    <p>Our goal is to be your free online resource for helpful product reviews and comparisons. To support this mission, we may receive affiliate commissions from companies listed on our site.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Mailing Address:</h4>
+                    <p>Consumer Verification (CV)<br>83 Wilson St, Hazlehurst, GA 31539<br>Email: support@consumerverification.org</p>
+                </div>
+            </div>
+            <div class="footer-links">
+                <a href="contact.html">Contact Us</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms Of Use</a>
+                <a href="about.html">About</a>
+            </div>
+            <div class="copyright">
+                <p>Copyright © 2025 Consumer Verification. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 工具函数：防抖和节流
+        function debounce(func,wait){let timeout;return function executedFunction(...args){const later=()=>{clearTimeout(timeout);func(...args)};clearTimeout(timeout);timeout=setTimeout(later,wait)}}
+        function throttle(func,limit){let inThrottle;return function(...args){if(!inThrottle){func.apply(this,args);inThrottle=true;setTimeout(()=>inThrottle=false,limit)}}}
+
+        // 自动更新日期的逻辑
+        function updateDates() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = today.toLocaleDateString('en-US', options);
+            const monthName = today.toLocaleDateString('en-US', { month: 'long' });
+            
+            const dateEl = document.getElementById('autoDate');
+            if(dateEl) dateEl.innerText = "✓ Last Updated - " + formattedDate;
+            
+            const promoEl = document.getElementById('promoDate');
+            if(promoEl) promoEl.innerText = formattedDate;
+
+            const fixEl = document.getElementById('offerDateFix');
+            if(fixEl) fixEl.innerText = formattedDate;
+            
+            const textMonthEl = document.getElementById('offerTextDate');
+            if(textMonthEl) textMonthEl.innerText = monthName + " " + today.getFullYear();
+        }
+
+        // 图片懒加载
+        function lazyLoadImages() {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '50px' });
+            images.forEach(img => imageObserver.observe(img));
+        }
+
+        // 核心交互逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDates(); // 初始化日期
+            lazyLoadImages(); // 初始化懒加载
+
+            // 移动端菜单
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.querySelector('.nav-links');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    const spans = menuToggle.querySelectorAll('span');
+                    if (navLinks.classList.contains('active')) {
+                        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                        spans[1].style.opacity = '0';
+                        spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                    } else {
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
+                });
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        const spans = menuToggle.querySelectorAll('span');
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    });
+                });
+            }
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#' && href.length > 1) {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            const offsetTop = target.offsetTop - 80;
+                            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+
+            // 滚动动画
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translate3d(0, 0, 0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.product-table-wrapper').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translate3d(0, 30px, 0)';
+                card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(card);
+            });
+        });
+
+        // 页面加载动画
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '1';
+        }, { once: true });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "product-card-clone",
+  "version": "1.0.0",
+  "description": "Pixel-perfect product card clone - Pure HTML/CSS",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "start": "python3 -m http.server 8000"
+  },
+  "keywords": ["html", "css", "static"],
+  "author": "",
+  "license": "MIT"
+}
