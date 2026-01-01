@@ -101,7 +101,276 @@
     .disclosure-box.active {
       display: block;
     }
-  </style>
+  
+    /* --- Author Box (bigger + cleaner) --- */
+    .author-box{
+      max-width: 980px;
+      margin: 28px auto 44px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    }
+    .author-avatar{
+      width: 82px;
+      height: 82px;
+      border-radius: 999px;
+      object-fit: cover;
+      flex: 0 0 82px;
+      border: 2px solid #e2e8f0;
+    }
+    .author-content{ flex: 1; min-width: 0; }
+    .author-head{
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .author-kicker{
+      margin: 0 0 6px 0;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 700;
+    }
+    .author-name{
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    .author-role{
+      margin: 6px 0 0 0;
+      font-size: 14px;
+      color: #334155;
+      font-weight: 600;
+    }
+    .author-meta{
+      margin: 6px 0 0 0;
+      font-size: 13px;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .author-rating{
+      text-align: right;
+      flex: 0 0 auto;
+      padding-top: 2px;
+    }
+    .author-stars{
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+    .author-stars img{
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+    .author-rating-text{
+      margin: 6px 0 0 0;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 600;
+    }
+    .author-bio{
+      margin: 12px 0 0 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #334155;
+    }
+
+    @media (max-width: 640px){
+      .author-box{
+        padding: 16px;
+        gap: 14px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .author-avatar{
+        width: 92px;
+        height: 92px;
+        flex-basis: 92px;
+      }
+      .author-head{
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .author-rating{ text-align: center; }
+    }
+
+  
+
+/* --- About Our Reviews (bigger + clearer) --- */
+.about-reviews{
+  max-width: 980px;
+  margin: 30px auto 56px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+.about-reviews-head h3{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+.about-reviews-sub{
+  margin: 8px 0 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #64748b;
+  font-weight: 600;
+}
+.reviews-grid{
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+  align-items: start;
+}
+.about-card{
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 14px 14px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.about-icon-wrap{
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: grid;
+  place-items: center;
+  flex: 0 0 44px;
+}
+.about-icon-wrap img{
+  width: 28px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
+}
+.about-icon{
+  font-weight: 900;
+  font-size: 18px;
+  color: #2563eb;
+}
+.about-text h5{
+  margin: 2px 0 6px 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+.about-text p{
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #334155;
+  font-weight: 500;
+}
+.about-meta{
+  margin-top: 8px;
+  display: grid;
+  gap: 6px;
+}
+.meta-row{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+.meta-label{
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.meta-value{
+  font-size: 12px;
+  color: #0f172a;
+  font-weight: 800;
+  text-align: right;
+}
+.how-we-rate{
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px;
+}
+.how-we-rate h4{
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 900;
+  color: #0f172a;
+}
+.how-we-rate h4 span{
+  color: #2563eb;
+}
+.rate-list, .team-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+.rate-list li, .team-list li{
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #334155;
+  font-weight: 600;
+}
+.rate-list li::before, .team-list li::before{
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #2563eb;
+  font-weight: 900;
+}
+.team-box{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #e2e8f0;
+}
+.team-title{
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 800;
+}
+@media (max-width: 900px){
+  .reviews-grid{ grid-template-columns: 1fr; }
+}
+@media (max-width: 640px){
+  .about-reviews{ padding: 16px; border-radius: 16px; }
+  .about-card{ padding: 12px; }
+  .about-reviews-head h3{ font-size: 16px; }
+  .about-reviews-sub{ font-size: 13px; }
+}
+</style>
 </head>
 <body>
   <header class="header">
@@ -492,60 +761,105 @@
         </div>
       </div>
 
-      <div class="author-box">
-        <img src="images/mike-chen.jpeg" alt="Ethan Park" class="author-image" />
-        <div class="author-info">
-          <p class="author-title">Written By: <strong>Ethan Park - Senior Product Reviewer & Wellness Enthusiast</strong> 10+ years testing consumer wellness products | Sleep & recovery focus</p>
-          <div class="author-stars">
-            <img src="images/star-2162169626.svg" alt="star" />
-            <img src="images/star-2162169626.svg" alt="star" />
-            <img src="images/star-2162169626.svg" alt="star" />
-            <img src="images/star-2162169626.svg" alt="star" />
-            <img src="images/star-2162169626.svg" alt="star" />
+      <section class="author-box" aria-label="Author information">
+        <img src="images/mike-chen.jpeg" alt="Ethan Park" class="author-avatar" loading="lazy" />
+        <div class="author-content">
+          <div class="author-head">
+            <div class="author-id">
+              <p class="author-kicker">WRITTEN BY</p>
+              <h4 class="author-name">Ethan Park</h4>
+              <p class="author-role">Senior Product Reviewer & Wellness Enthusiast</p>
+              <p class="author-meta">10+ years testing consumer wellness products • Sleep &amp; recovery focus</p>
+            </div>
+
+            <div class="author-rating" aria-label="Author rating">
+              <div class="author-stars">
+                <img src="images/star-2162169626.svg" alt="star" />
+                <img src="images/star-2162169626.svg" alt="star" />
+                <img src="images/star-2162169626.svg" alt="star" />
+                <img src="images/star-2162169626.svg" alt="star" />
+                <img src="images/star-2162169626.svg" alt="star" />
+              </div>
+              <p class="author-rating-text">Editor rating</p>
+            </div>
           </div>
+
           <p class="author-bio">Ethan Park has spent the last decade testing consumer wellness products with a focus on sleep, recovery, and home health tools. He combines hands-on testing with user feedback analysis to help readers find products that actually deliver measurable benefits.</p>
+        </div>
+      </section>
+
+      <div class="about-reviews" aria-label="About our reviews">
+  <div class="about-reviews-head">
+    <div>
+      <h3>About Our Reviews</h3>
+      <p class="about-reviews-sub">Transparent testing, real-world use, and clear rating criteria.</p>
+    </div>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="reviews-left">
+      <div class="about-card">
+        <div class="about-icon-wrap">
+          <img src="images/tested-by-real-people.png" alt="" aria-hidden="true" />
+        </div>
+        <div class="about-text">
+          <h5>Tested by real people</h5>
+          <p>Every product gets at least 100 hours of real-world testing. No lab-only reviews here.</p>
         </div>
       </div>
 
-      <div class="about-reviews">
-        <h3>ABOUT OUR REVIEWS</h3>
-        <div class="about-item">
-          <img src="images/tested-by-real-people.png" alt="Tested by real people" />
-          <div>
-            <p><strong>Tested by real people</strong></p>
-            <p>Every product gets at least 100 hours of real-world testing. No lab-only reviews here.</p>
-          </div>
+      <div class="about-card">
+        <div class="about-icon-wrap">
+          <span class="about-icon" aria-hidden="true">✓</span>
         </div>
-        <div class="about-item">
-          <div>
-            <p><strong>Actually bought the products</strong></p>
-            <p>Unlike most review sites, we purchase everything we test. No free samples or sponsored reviews.</p>
-          </div>
-        </div>
-        <div class="about-item">
-          <div>
-            <p><strong>Updated monthly</strong></p>
-            <p>Last Updated: DECEMBER 31, 2025<br/>Next Update: JANUARY 30, 2026</p>
-          </div>
-        </div>
-        <div class="how-we-rate">
-          <h4>How we <span>rate</span> products?</h4>
-          <ul>
-            <li>100+ hours of hands-on testing</li>
-            <li>50+ customer interviews</li>
-            <li>Conductivity & durability checks</li>
-            <li>Price-value analysis</li>
-            <li>Long-term durability testing</li>
-          </ul>
-          <p><strong>Our testing team includes:</strong></p>
-          <ul>
-            <li>2 product testers</li>
-            <li>1 health researcher</li>
-            <li>3 everyday users</li>
-            <li>1 data analyst</li>
-          </ul>
+        <div class="about-text">
+          <h5>Actually bought the products</h5>
+          <p>Unlike most review sites, we purchase everything we test. No free samples or sponsored reviews.</p>
         </div>
       </div>
+
+      <div class="about-card">
+        <div class="about-icon-wrap">
+          <span class="about-icon" aria-hidden="true">↻</span>
+        </div>
+        <div class="about-text">
+          <h5>Updated monthly</h5>
+          <div class="about-meta">
+            <div class="meta-row">
+              <span class="meta-label">Last updated</span>
+              <span class="meta-value">DECEMBER 31, 2025</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Next update</span>
+              <span class="meta-value">JANUARY 30, 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="reviews-right how-we-rate" aria-label="How we rate products">
+      <h4>How we <span>rate</span> products</h4>
+      <ul class="rate-list">
+        <li>100+ hours of hands-on testing</li>
+        <li>50+ customer interviews</li>
+        <li>Conductivity &amp; durability checks</li>
+        <li>Price-value analysis</li>
+        <li>Long-term durability testing</li>
+      </ul>
+
+      <div class="team-box">
+        <p class="team-title">Our testing team includes</p>
+        <ul class="team-list">
+          <li>2 product testers</li>
+          <li>1 health researcher</li>
+          <li>3 everyday users</li>
+          <li>1 data analyst</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</div>
     </div>
   </section>
 
